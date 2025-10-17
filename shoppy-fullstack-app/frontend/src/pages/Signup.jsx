@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { validateSignupFormCheck } from '../utils/validate.js';
 import { initForm } from '../utils/init.js';
 import { axiosPost } from '../utils/dataFetch.js';
+import { useDispatch } from 'react-redux';
+import { getSignup,getIdCheck } from '../feature/auth/authAPI.js';
 
-export function Signup() { 
+export function Signup() {
+    const dispatch = useDispatch();
     const initArray = ['id', 'pwd', 'cpwd', 'name', 'phone', 'emailName', 'emailDomain'];
     // const initForm = initArray.reduce((acc,cur) => {  //비동기
     //         acc[cur] = "";
@@ -21,6 +24,8 @@ export function Signup() {
     const [form, setForm] = useState(initForm(initArray));
     const [errors, setErrors] = useState({...initForm(initArray), emailDomain: ""});
 
+
+
     const handleChangeForm = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value});
@@ -34,28 +39,23 @@ export function Signup() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         const param = {  refs: refs,   setErrors: setErrors }
-        if(validateSignupFormCheck(param)) {
-            /**
-                스프링부트 연동 - Post, /member/signup
-             */
-            const url = "http://localhost:8080/member/signup"
-            const formData = {...form, email: form.emailName.concat('@',form.emailDomain)}
-            console.log('formData -->' , formData);
-            const result = await axiosPost(url,formData);
-            if(result){ alert("회원가입이 완료되었습니다.")
+        const formData = {...form, email: form.emailName.concat('@',form.emailDomain)}
+        const result = await dispatch(getSignup(formData,param));
+        console.log("result -->" ,result);
+
+        if(result){ alert("회원가입이 완료되었습니다.")
             //로그인 페이지로 이동!!
             navigate("/login")
             }
             else alert("회원가입에 실패하였습니다.")
-        }
     }
-    const handleDupulicateIdCheck = async() => {
-        const url = "http://localhost:8080/member/idcheck";
-        const data = {"id":form.id};
-        const result = await axiosPost(url,data);
-        alert(result);
 
+    const handleDupulicateIdCheck = async() => {
+        const result = await dispatch(getIdCheck(form.id));
+
+        alert(result);
         }
+
 
     return (
     <div className="content">
@@ -65,7 +65,7 @@ export function Signup() {
             <form onSubmit={handleSubmit}>
                 <ul>
                     <li>
-                        <label for="" ><b>아이디</b></label>
+                        <label  ><b>아이디</b></label>
                         <span style={{color:"red", fontSize:"0.8rem"}}>{errors.id}</span>
                         <div>
                             <input type="text" 
