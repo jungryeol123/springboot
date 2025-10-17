@@ -15,14 +15,26 @@ public class MemberServiceImpl implements MemberService{    //memberService memb
         this.memberRepository = memberRepository;
     }
     @Override
-    public void signup(Member member) {
-        System.out.println("memberService.signp --> ");
-        System.out.println(member.getId());
-        System.out.println(member.getPwd());
-        System.out.println(member.getName());
-        System.out.println(member.getPhone());
-        System.out.println(member.getEmail());
-
-        memberRepository.save(member);
+    public int signup(Member member) {
+        return memberRepository.save(member);
+    }
+    @Override
+    public boolean idCheck(String id) {
+        boolean result = true;
+        Long count = memberRepository.findById(id);
+        System.out.println("count-->" + count);
+        if(count == 0) result = false;
+        return result;
+    }
+//    @Override
+//    public Long login(Member member) {
+//        return memberRepository.matchByIdPwd(member.getId(),member.getPwd());
+//    }
+    @Override
+    public boolean matchCheck (String id, String pwd) {
+        boolean result = true;
+        Long count = memberRepository.matchByIdPwd(id,pwd);
+        if (count == 1) result = false;
+        return result;
     }
 }

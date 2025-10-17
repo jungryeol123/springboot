@@ -20,34 +20,29 @@ public class MemberController {
     
     @PostMapping("/idcheck")
     public String idcheck (@RequestBody Member member) {
-        boolean result = false;
+        boolean result = memberService.idCheck(member.getId());
+
         String msg = "";
-        if(member.getId().equals("test")) result = true;
+//        if(member.getId().equals("test")) result = true;
         if(result) msg = "이미 사용중인 아이디 입니다.";
         else msg = "사용가능한 아이디 입니다.";
         return msg;
     }
     @PostMapping("/signup")
     public boolean signup (@RequestBody Member member) {
-        
-
-        boolean result = true;
-        System.out.println(member.getId());
-        System.out.println(member.getPwd());
-        System.out.println(member.getName());
-        System.out.println(member.getPhone());
-        System.out.println(member.getEmail());
-
+        boolean result = false;
         //서비스 호출
-        memberService.signup(member);
+        int rows = memberService.signup(member);
+        if(rows == 1) result = true;
         return result;
     }
     @PostMapping("/login")
     public boolean login (@RequestBody Member member) {
-        boolean result = false;
-        if(member.getId().equals("test") && member.getPwd().equals("1234"))
-            result = true;
-
+        boolean result = true;
+//        if(member.getId().equals("test") && member.getPwd().equals("1234"))
+//            result = true;
+        boolean rows = memberService.matchCheck(member.getId(),member.getPwd());
+        if(rows == true) result = false;
         return result;
     }
 }
