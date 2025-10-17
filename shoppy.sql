@@ -19,6 +19,9 @@ create table member (
 );
 show tables;
 desc member;
+select id,pwd,name,phone,email,mdate from member;
+select count(id) as exist from member where id = "hong123";
+
 
 
 
