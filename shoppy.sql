@@ -9,3 +9,19 @@ select database();
 show tables;
 
 /** member 테이블 생성 */
+create table member (
+	id varchar(50) primary key,
+    pwd varchar(50) not null,
+    name varchar(20) not null,
+    phone char(13),
+    email varchar(50) not null,
+    mdate date
+);
+show tables;
+desc member;
+
+
+
+
+
+
