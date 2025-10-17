@@ -41,8 +41,8 @@ public class MemberController {
         boolean result = true;
 //        if(member.getId().equals("test") && member.getPwd().equals("1234"))
 //            result = true;
-        boolean rows = memberService.matchCheck(member.getId(),member.getPwd());
-        if(rows == true) result = false;
+        boolean match = memberService.matchCheck(member.getId(),member.getPwd());
+        if(match == true) result = false;
         return result;
     }
 }
