@@ -16,7 +16,8 @@ export function ProductDetail() {
     const {pid} = useParams();
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product.product);
-    const imgList = useSelector((state) => state.product.product.imgList);
+    let imgList = useSelector((state) => state.product.product.imgList);
+//     imgList = JSON.parse(imgList);
 
     const [size,setSize] = useState('XS');
     const tabLabels = ['DETAIL','REVIEW','Q&A','RETURN & DELIVERY'];

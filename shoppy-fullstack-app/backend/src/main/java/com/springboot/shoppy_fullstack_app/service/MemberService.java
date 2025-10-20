@@ -6,5 +6,5 @@ public interface MemberService {
     int signup(Member member);
     boolean idCheck(String id);
 //    Long login(Member member);
-    boolean matchCheck(String id, String pwd);
+    boolean login(Member member);
 }

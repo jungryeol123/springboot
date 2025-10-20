@@ -2,6 +2,12 @@ import axios from 'axios';
 /**
  * 배열의 rows 그룹핑
  */
+ // axiosPost 함수를 이용하여 벡엔드 연동 처리
+ export const axiosGet = async (url) => {
+     const response = await axios.get(url);
+     return response.data;
+ }
+
 export const groupByRows = (array,number) => {
     //출력 포멧 함수 : 한줄에 상품 3개씩 출력
           // const rows = [];

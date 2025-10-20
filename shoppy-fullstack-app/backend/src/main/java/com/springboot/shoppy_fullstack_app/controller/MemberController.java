@@ -39,9 +39,8 @@ public class MemberController {
     @PostMapping("/login")
     public boolean login (@RequestBody Member member) {
         boolean result = true;
-//        if(member.getId().equals("test") && member.getPwd().equals("1234"))
-//            result = true;
-        boolean match = memberService.matchCheck(member.getId(),member.getPwd());
+
+        boolean match = memberService.login(member);
         if(match == true) result = false;
         return result;
     }

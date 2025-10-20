@@ -2,6 +2,7 @@ package com.springboot.shoppy_fullstack_app.repository;
 
 import com.springboot.shoppy_fullstack_app.dto.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
@@ -35,9 +36,10 @@ public class JdbcTemplateMemberRepository implements MemberRepository{
         return count;
     }
     @Override
-    public Long matchByIdPwd(String id, String pwd) {
-        String sql = "select count(*) from member where id = ? and pwd = ?";
-        Long count = jdbcTemplate.queryForObject(sql, Long.class, id,pwd);
-        return count;
+    public String loginCheck(String id) {
+        String sql = "select pwd from member where id = ?";
+//        Object[]params = new Object[]{member.getId(), member.getPwd()};
+        Member member = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Member.class), id);
+        return member.getPwd();
     }
 }
