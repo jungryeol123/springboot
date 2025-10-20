@@ -5,9 +5,9 @@ import { axiosData,axiosGet, groupByRows,axiosPost } from '../../utils/dataFetch
 
 export const getProduct = (pid) => async (dispatch) => {
     const url = "/product/pid";
-    const product = await axiosPost(pid);
+    const product = await axiosPost(url,{"pid" : pid});
     console.log("product----------------" ,product)
-    dispatch(filterProduct("product":product));
+    dispatch(filterProduct({"product":product}));
 }
 
 export const getProductList = (number) => async (dispatch) => {

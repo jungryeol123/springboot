@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   productList: [],  //출력용 - 2차원 배열
   products: [],  //원본 - 1차원 배열
-  product:{}
+  product:{},
+  imgList:[]
 }
 
 export const productSlice = createSlice({
@@ -18,6 +19,7 @@ export const productSlice = createSlice({
     filterProduct(state,action) {
         const { product } = action.payload;
         state.product = product;
+        state.imgList = JSON.parse(product.imgList);
         // 1. productList가 2차원 배열이므로 flat() 함수를 이용하여 1차원 변경 후 filter
         // const [filterProduct] = productList.flat().filter((item) => item.pid === pid);
         // state.product = filterProduct;

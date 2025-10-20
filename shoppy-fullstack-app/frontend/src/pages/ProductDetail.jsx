@@ -16,7 +16,7 @@ export function ProductDetail() {
     const {pid} = useParams();
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product.product);
-    let imgList = useSelector((state) => state.product.product.imgList);
+    let imgList = useSelector((state) => state.product.imgList);
 //     imgList = JSON.parse(imgList);
 
     const [size,setSize] = useState('XS');
@@ -32,7 +32,7 @@ export function ProductDetail() {
         <div className='content'>
             <div className='product-detail-top'>
                 <div className='product-detail-image-top'>
-                    <img src={product.image} />
+                    <img src={`/images/${product.image}`} />
                     <ImageList className="product-detail-image-top-list" imgList = {imgList}/>
                 </div>
                     <ul className='product-detail-info-top'>

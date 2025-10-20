@@ -18,8 +18,8 @@ public class ProductController {
     }
 
     @PostMapping("/pid")
-    public Product pid(int pid) {
-        return productService.findByPid(pid);
+    public Product pid(@RequestBody Product product) {
+        return productService.findByPid(product.getPid());
     }
     @GetMapping("/all")
     public List<Product> all() {
