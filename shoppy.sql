@@ -21,10 +21,42 @@ show tables;
 desc member;
 select id,pwd,name,phone,email,mdate from member;
 select count(id) as exist from member where id = "hong123";
+select count(*) from member where id = "hong123" and pwd = "1234";
+ALTER TABLE member MODIFY COLUMN pwd VARCHAR(100) NOT NULL;
+
+select pwd from member where id = 'test';
+
+SET SQL_SAFE_UPDATES = 0;
+delete from member where mdate = '2025-10-17';
+
+select pwd from member where id = 'test';
 
 
-
-
-
+/****************************
+	상품 테이블 : product
+****************************/
+create table product (
+	pid		int auto_increment primary key,
+    name 	varchar(200) not null,
+    price 	long,
+    info	varchar(200),
+    rate	double,
+    image	varchar(100),
+    imgList	json 
+);
+drop table product;
+desc product;
+select * from product;
+insert into product(name, price, info, rate, image, imgList)
+	values
+		  ('후드티',15000,'검정색 후드티',2.2,'2.webp', JSON_Array('2.webp','2.webp','2.webp')),
+		  ('원피스',25000,'원피스',4,'3.webp', JSON_Array('3.webp','3.webp','3.webp')),
+          ('반바지',12000,'반바지',3.2,'4.webp', JSON_Array('4.webp','4.webp','4.webp')),
+          ('티셔츠',20000,'티셔츠',5,'5.webp', JSON_Array('5.webp','5.webp','5.webp')),
+          ('스트레치 비스트 드레스',55000,'스트레치 비스트 드레스',3.5,'6.webp', JSON_Array('6.webp','6.webp','6.webp')),
+          ('자켓',115000,'자켓',4.5,'7.webp', JSON_Array('7.webp','7.webp','7.webp'));
+select * from product ;
+select pid, name, price, info, rate, image, imgList from product;
+select pid, name, price, info, rate, image, imgList from product where pid = 1;
 
 
