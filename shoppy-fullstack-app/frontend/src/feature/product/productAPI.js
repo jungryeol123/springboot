@@ -21,7 +21,7 @@ export const getDetailinfo = async(pid) =>  {
 export const getProduct = (pid) => async (dispatch) => {
     const url = "/product/pid";
     const product = await axiosPost(url,{"pid" : pid});
-    console.log("product----------------" ,product)
+//    console.log("product----------------" ,product)
     dispatch(filterProduct({"product":product}));
 }
 
