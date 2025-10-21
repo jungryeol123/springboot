@@ -38,10 +38,10 @@ public class MemberController {
     }
     @PostMapping("/login")
     public boolean login (@RequestBody Member member) {
-        boolean result = true;
+        boolean result = false;
 
         boolean match = memberService.login(member);
-        if(match == true) result = false;
-        return result;
+        if(match == false) result = true;
+        return !result;
     }
 }

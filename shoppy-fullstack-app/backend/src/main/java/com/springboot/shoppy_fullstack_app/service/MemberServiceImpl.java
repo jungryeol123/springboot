@@ -43,10 +43,10 @@ public class MemberServiceImpl implements MemberService{    //memberService memb
     @Override
     public boolean login (Member member) {
         String encodePwd = memberRepository.loginCheck(member.getId());
-        if(encodePwd == null) {
-            return false;
-        }
         boolean result = passwordEncoder.matches(member.getPwd(),encodePwd);
+        if(idCheck(member.getId())  ){
+            return result;
+        }
         return !result;
 
     }

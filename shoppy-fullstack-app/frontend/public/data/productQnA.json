@@ -5,8 +5,9 @@
         "title" : "사이즈문의",
         "isLock" : false,
         "content" : "자켓 사이즈 문의 드립니다",
-        "id" : "so*****",
-        "cdate" : "2025.09.22"
+        "id" : "hong123",
+        "cdate" : "2025.10.20",
+        "pid" : "7"
     },
     {
         "qid" : "2",
@@ -14,8 +15,9 @@
         "title" : "반품문의",
         "isLock" : true,
         "content" : "자켓 사이즈 문의 드립니다",
-        "id" : "re*****",
-        "cdate" : "2025.09.22"
+        "id" : "song123",
+        "cdate" : "2025.10.20",
+        "pid" : "5"
     },
     {
         "qid" : "3",
@@ -23,8 +25,9 @@
         "title" : "배송문의",
         "isLock" : false,
         "content" : "자켓 사이즈 문의 드립니다",
-        "id" : "ty*****",
-        "cdate" : "2025.09.22"
+        "id" : "test",
+        "cdate" : "2025.10.20",
+        "pid" : "4"
     },
     {
         "qid" : "4",
@@ -32,8 +35,9 @@
         "title" : "사이즈문의",
         "isLock" : false,
         "content" : "자켓 사이즈 문의 드립니다",
-        "id" : "si*****",
-        "cdate" : "2025.09.22"
+        "id" : "hong123",
+        "cdate" : "2025.10.20",
+        "pid" : "3"
     },
     {
         "qid" : "5",
@@ -41,8 +45,9 @@
         "title" : "상품문의",
         "isLock" : false,
         "content" : "자켓 사이즈 문의 드립니다",
-        "id" : "er*****",
-        "cdate" : "2025.09.22"
+        "id" : "test",
+        "cdate" : "2025.10.20",
+        "pid" : "2"
     },
     {
         "qid" : "6",
@@ -50,8 +55,68 @@
         "title" : "사이즈문의",
         "isLock" : false,
         "content" : "자켓 사이즈 문의 드립니다",
-        "id" : "qw*****",
-        "cdate" : "2025.09.22"
+        "id" : "song123",
+        "cdate" : "2025.09.22",
+        "pid" : "1"
+    },
+    {
+      "qid" : "1",
+      "isComplete" : true,
+      "title" : "사이즈문의",
+      "isLock" : false,
+      "content" : "자켓 사이즈 문의 드립니다",
+      "id" : "hong123",
+      "cdate" : "2025.10.20",
+      "pid" : "6"
+    },
+    {
+      "qid" : "2",
+      "isComplete" : true,
+      "title" : "반품문의",
+      "isLock" : true,
+      "content" : "자켓 사이즈 문의 드립니다",
+      "id" : "song123",
+      "cdate" : "2025.10.20",
+      "pid" : "5"
+    },
+    {
+      "qid" : "3",
+      "isComplete" : true,
+      "title" : "배송문의",
+      "isLock" : false,
+      "content" : "자켓 사이즈 문의 드립니다",
+      "id" : "test",
+      "cdate" : "2025.10.20",
+      "pid" : "4"
+    },
+    {
+      "qid" : "1",
+      "isComplete" : true,
+      "title" : "사이즈문의",
+      "isLock" : false,
+      "content" : "자켓 사이즈 문의 드립니다",
+      "id" : "hong123",
+      "cdate" : "2025.10.20",
+      "pid" : "3"
+    },
+    {
+      "qid" : "2",
+      "isComplete" : true,
+      "title" : "반품문의",
+      "isLock" : true,
+      "content" : "자켓 사이즈 문의 드립니다",
+      "id" : "song123",
+      "cdate" : "2025.10.20",
+      "pid" : "1"
+    },
+    {
+      "qid" : "3",
+      "isComplete" : true,
+      "title" : "배송문의",
+      "isLock" : false,
+      "content" : "자켓 사이즈 문의 드립니다",
+      "id" : "test",
+      "cdate" : "2025.10.20",
+      "pid" : "4"
     }
-    
 ]
