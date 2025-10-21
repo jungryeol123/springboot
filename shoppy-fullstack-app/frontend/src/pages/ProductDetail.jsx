@@ -88,10 +88,10 @@ export function ProductDetail() {
                 </ul>
                 {tabName === "detail" 
                                 && < Detail imgList={imgList}
-                                            info={product.detailInfo} />}
+                                            pid = {pid} />}
 
                 {tabName ==="review" && <Review />}
-                {tabName ==="qna" && <QnA />}
+                {tabName ==="qna" && <QnA pid = {pid}/>}
                 {tabName === "return" && <Return />}
                 
             </div>

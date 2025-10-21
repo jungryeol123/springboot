@@ -60,3 +60,106 @@ select pid, name, price, info, rate, image, imgList from product;
 select pid, name, price, info, rate, image, imgList from product where pid = 1;
 
 
+/*
+	상품상세정보 테이블 생성 : product-detailinfo
+*/
+show tables;
+create table product_detailinfo (
+	did			int auto_increment	primary key,
+    title_en 	varchar(100) 	  	not null,
+    title_ko	varchar(100) 	  	not null,
+    pid			int					not null,
+    list		json,
+    constraint fk_product_pid foreign key(pid) references product(pid)
+    on delete cascade
+    on update cascade
+);
+desc product_detailinfo;
+select * from product_detailinfo;
+
+-- mysql에서 json, csv, excel.. 데이터 파일을 업로드 하는 경로
+show variables like 'secure_file_priv';
+
+-- products.json 피일의 detailinfo 정보 매핑
+insert into product_detailinfo(title_en, title_ko, pid, list )
+select 
+	jt.title_en,
+    jt.title_ko,
+    jt.pid,
+    jt.list
+from 
+	json_table(
+		cast(load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/products.json') 
+				AS CHAR CHARACTER SET utf8mb4 ),
+		'$[*]' COLUMNS (
+			 title_en   	VARCHAR(100)  PATH '$.detailInfo.title_en',
+			 title_ko   	VARCHAR(100)  PATH '$.detailInfo.title_ko',
+			 list   	json PATH '$.detailInfo.list',
+			 pid		int	 PATH '$.pid'
+		   )
+    ) as jt;
+select * from product_detailinfo;
+
+-- pid : 1에 대한 상품정보와 상세 정보 출력
+
+select * from product p, product_detailinfo pd
+where p.pid = pd.pid and p.pid = 1;
+
+select pid, did, title_en as titleEn, title_ko as titleKo, list from product_detailinfo where pid = 1;
+
+select * from member;
+
+/*
+	상품 QnA 테이블 생성 : product_qna
+*/
+create table product_qna(
+	qid				int auto_increment	primary key,
+    title	        varchar(100) 	  	not null,
+    content	        varchar(200) 	  	,
+    is_complete		boolean 	  		,
+    is_lock 		boolean 			not null,
+    id				varchar(50) 		not null,
+    pid				int					not null,
+    cdate 			datetime			,
+    constraint fk_product_qna_pid foreign key(pid) references product(pid)
+    on delete cascade
+    on update cascade,
+    constraint fk_member_id foreign key(id) references member(id)
+    on delete cascade
+    on update cascade
+);
+select * from product_qna;
+
+show variables like 'secure_file_priv';
+
+insert into product_qna(title,content,is_complete,is_lock,id,pid,cdate)
+select 
+	jt.title,
+    jt.content,
+    jt.is_complete,
+    jt.is_lock,
+    jt.id,
+    jt.pid,
+    jt.cdate
+from 
+	json_table(
+		cast(load_file('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/productQnA.json') 
+				AS CHAR CHARACTER SET utf8mb4 ),
+		'$[*]' COLUMNS (
+			 title   		VARCHAR(100)  PATH '$.title',
+			 content   		VARCHAR(200)  PATH '$.content',
+			 is_complete   	boolean		  PATH '$.isComplete',
+			 is_lock		boolean	 	  PATH '$.isLock',
+             id 			VARCHAR(50)   PATH '$.id',
+             pid 			int 		  PATH '$.pid',
+             cdate			datetime 	  PATH '$.cdate'
+		   )
+    ) as jt;
+
+select * from product_qna;
+-- hong 회원이 상품 분홍색 후드티 상품에 쓴 QnA
+-- 회원아이디(id), 회원명(name), 가입날짜(mdate), 상품명(name), 상품가격(price), QnA 제목(title), 내용(content), 등록날짜(cdate)
+select * from product_qna pq, member mb, product p where pq.id = mb.id and p.pid = pq.pid and mb.id = 'hong123' and pid= 1;
+select * from member;
+
+
