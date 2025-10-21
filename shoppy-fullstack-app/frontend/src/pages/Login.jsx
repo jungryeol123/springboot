@@ -1,5 +1,5 @@
 import { useState, useRef,useContext } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate,Link} from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
 import { FaLock } from "react-icons/fa";
 import { validateFormCheck } from '../utils/validate.js';
@@ -88,7 +88,7 @@ export function Login() {
                             <label for="">아이디 저장</label>
                         </div>
                         <div>
-                            <a href="#">아이디 찾기</a> 
+                            <Link to="/find-username">아이디 찾기</Link>
                             <span>&gt;</span>
                             <a href="#">비밀번호 찾기</a> 
                             <span>&gt;</span>
