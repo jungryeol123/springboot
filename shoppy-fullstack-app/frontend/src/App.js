@@ -16,7 +16,7 @@ import { CartProvider } from './context/CartContext.js';
 import { AuthProvider } from './context/AuthContext.js';
 import { ProtectedPageRoute } from './pages/ProtectedPageRoute.js';
 import { ProductProvider } from './context/ProductContext.js';
-import { FindUsername } from './pages/FindUserId.jsx';
+
 
 
 export default function App() {
@@ -61,7 +61,6 @@ export default function App() {
           <Route index element={<Home/>}/>
           <Route path='/all' element={<Products/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path="/find-username" element={<FindUsername />} />
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/cart' element={<ProtectedPageRoute>
                                           <Cart />

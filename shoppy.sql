@@ -8,6 +8,7 @@ select database();
 /** 테이블 목록 확인 */
 show tables;
 
+select * from member;
 /** member 테이블 생성 */
 create table member (
 	id varchar(50) primary key,
@@ -159,7 +160,77 @@ from
 select * from product_qna;
 -- hong 회원이 상품 분홍색 후드티 상품에 쓴 QnA
 -- 회원아이디(id), 회원명(name), 가입날짜(mdate), 상품명(name), 상품가격(price), QnA 제목(title), 내용(content), 등록날짜(cdate)
-select * from product_qna pq, member mb, product p where pq.id = mb.id and p.pid = pq.pid and mb.id = 'hong123' and pid= 1;
+select m.id,m.name,m.mdate,p.name,p.price, pq.title,pq.content,pq.cdate from product_qna pq, member m, product p where pq.id = m.id and p.pid = pq.pid and m.id = 'hong123' and p.pid= 6;
 select * from member;
+select qid, title, content, is_complete as isComplete, is_lock as isLock, id, pid, cdate from product_qna where pid = 1;
+
+
+create table product_return(
+		rid 		int auto_increment primary key not null,
+		title   	varchar(100) 	   not null,
+        description varchar(200),
+        list 		json);
+
+
+insert into product_return(title, description, list)
+select
+	jt.title,
+    jt.description,
+    jt.list
+from 
+	json_table(
+		cast(load_file('C://ProgramData//MySQL//MySQL Server 8.0//Uploads//productReturn.json') 
+				AS CHAR CHARACTER SET utf8mb4 ),
+		'$[*]' COLUMNS (
+			 title   		VARCHAR(100)  PATH '$.title',
+			 description 	VARCHAR(200)  PATH '$.description',
+			 list   		json 		  PATH '$.list'
+		   )
+    ) as jt;
+show tables ;
+select * from product_return;
+select rid, title, description, list from product_return;
+drop table product_return;
+
+/*
+	장바구니 테이블 생성 : cart
+    cid,pid,id,size,qty,cdate
+*/
+create table cart(
+		cid 		int auto_increment primary key,
+		id 			varchar(50) 	   not null,
+        size 		varchar(2)		   not null,
+        qty			int				   not null,
+        pid 		int 			   not null,
+        cdate 		datetime		   not null,
+        constraint fk_cart_pid foreign key(pid) references product(pid)
+		on delete cascade		on update cascade,
+		constraint fk_cart_id foreign key(id) references member(id)
+		on delete cascade		on update cascade
+        );
+
+desc cart;
+select * from cart;
+SET SQL_SAFE_UPDATES = 0;
+delete from cart where cid in(1,2);
+
+-- pid:1 , size:xs 인 상품 조회
+select count(*) as checkQty,cid from cart 
+where pid = 1 and size = 'xs'
+group by cid;
+
+select cid, sum(pid = 1 and size = 'xs') as checkQty from cart group by cid
+order by checkQty desc
+limit 1;
+
+select cid, sum(pid = 1 and size = 'xs' and id = 'test') as checkQty 
+	from cart 
+	group by cid, id
+	order by checkQty desc
+	limit 1
+
+
+
+
 
 
