@@ -227,10 +227,15 @@ select cid, sum(pid = 1 and size = 'xs' and id = 'test') as checkQty
 	from cart 
 	group by cid, id
 	order by checkQty desc
-	limit 1
+	limit 1;
 
+select cid, sum(pid = 1 and size = "xs" and id = "test") as checkQty
+                       	from cart
+                       	group by cid, id
+                       	order by checkQty desc
+                       	limit 1;
 
-
-
+insert into cart(size, qty, pid, id, cdate)
+                    values('m', 1, 1, 'test', now());
 
 

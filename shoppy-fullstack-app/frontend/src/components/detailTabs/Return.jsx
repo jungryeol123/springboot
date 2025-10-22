@@ -1,75 +1,39 @@
-import React from 'react';
-import { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getReturn } from '../../feature/product/productAPI.js';
 
 export function Return() {
-    const [returnData,setReturnData] = useState({});
-    useEffect(() => {
+    const [returnData, setReturnData] = useState({});
+    useEffect(()=> {
         const fetch = async() => {
-        const jsonData = await getReturn();
-        setReturnData(jsonData);
+            const jsonData = await getReturn();
+            setReturnData(jsonData);
         }
         fetch();
-    },{})
-//     console.log(returnData);
-    
+    }, [])
+
     return (
-        <div className='review-top'>
+        <div>
             <div style={{paddingTop:"20px"}}></div>
             <h4>{returnData && returnData.title}</h4>
-            <p>{returnData && returnData.description}</p>
+            <p style={{paddingBottom:"20px"}}>{returnData && returnData.description}</p>
             <table className='review-list-content'>
                 <tbody>
-                    <tr>
-                        <td style={{width:"30%"}}>배송정보</td>
-                        <td>
-                            <ul style={{textAlign:"left"}}>
-                                {returnData.deliveryInfo
-                                 && returnData.deliveryInfo.map(item =>
-                                    <li>{item}</li>
-                                 )}
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style={{width:"30%"}}>취소/반품/교환 안내</td>
-                        <td>
-                            <ul style={{textAlign:"left"}}>
-                                {returnData.infoList
-                                 && returnData.infoList.map(item =>
-                                    <li>{item}</li>
-                                 )}
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style={{width:"30%"}}>반품/교환 불가능한 경우</td>
-                        <td>
-                            <ul style={{textAlign:"left"}}>
-                                {returnData.returnNotInfo
-                                 && returnData.returnNotInfo.map(item =>
-                                    <li>{item}</li>
-                                 )}
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style={{width:"30%"}}>A/S 안내</td>
-                        <td>
-                            <ul style={{textAlign:"left"}}>
-                                {returnData.asInfo
-                                 && returnData.asInfo.map(item =>
-                                    <li>{item}</li>
-                                 )}
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        
-                    </tr>
+                    {returnData.list && returnData.list.map(item =>
+                        <tr>
+                            <td style={{width:"30%", textAlign:"center"}}>{item.title}</td>
+                            <td>
+                                <ul  style={{textAlign:"left"}}>
+                                {item.infoList
+                                    && item.infoList .map(item =>
+                                        <li>{item}</li>
+                                    )}
+                                </ul>
+                            </td>
+                        </tr>
+                    ) }
+                    <tr><td colSpan={2}></td></tr>
                 </tbody>
             </table>
         </div>
     );
 }
-

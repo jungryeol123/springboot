@@ -23,9 +23,7 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public int add(CartItem cartItem) {
-        int aa = cartRepository.add(cartItem);
-        System.out.println("sdsdsd"+ aa);
-        return aa;
+        return cartRepository.add(cartItem);
     }
     @Override
     public int updateQty(CartItem cartItem) {
