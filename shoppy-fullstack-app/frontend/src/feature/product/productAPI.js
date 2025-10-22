@@ -3,6 +3,16 @@ import { createProduct,filterProduct } from './productSlice.js';
 import { axiosData,axiosGet, groupByRows,axiosPost } from '../../utils/dataFetch.js';
 
 
+//상품 리턴
+export const getReturn = async() =>  {
+    const url = "/product/return";
+    const returnData = await axiosGet(url);
+    const list = JSON.parse(returnData.list);
+    console.log("returnData-------",returnData)
+    console.log("list-------",list)
+    return {...returnData, list:list};
+}
+
 //상품 QnA
 export const getQna = async(pid) =>  {
     const url = "/product/qna";

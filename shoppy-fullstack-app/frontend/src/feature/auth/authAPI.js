@@ -15,7 +15,7 @@ export const getLogin = (formData, param) => async(dispatch) => {
 
     if(result){
            //로그인 성공
-           dispatch(login({"useId":formData.id}));
+           dispatch(login({"userId":formData.id}));
            return true;
             }
         }

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { axiosData } from '../../utils/dataFetch';
+import { getReturn } from '../../feature/product/productAPI.js';
 
 export function Return() {
     const [returnData,setReturnData] = useState({});
     useEffect(() => {
         const fetch = async() => {
-        const jsonData = await axiosData("/data/productReturn.json");
+        const jsonData = await getReturn();
         setReturnData(jsonData);
         }
         fetch();
@@ -35,8 +35,8 @@ export function Return() {
                         <td style={{width:"30%"}}>취소/반품/교환 안내</td>
                         <td>
                             <ul style={{textAlign:"left"}}>
-                                {returnData.returnInfo
-                                 && returnData.returnInfo.map(item =>
+                                {returnData.infoList
+                                 && returnData.infoList.map(item =>
                                     <li>{item}</li>
                                  )}
                             </ul>
