@@ -29,4 +29,9 @@ public class CartController {
     public int add(@RequestBody CartItem cartItem) {
         return cartService.add(cartItem);
     }
+
+    @PostMapping("/count")
+    public CartItem count(@RequestBody CartItem cartItem) {
+        return cartService.getCount(cartItem);
+    }
 }

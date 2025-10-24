@@ -6,5 +6,6 @@ public interface CartRepository {
     int add(CartItem cartItem);
     int updateQty(CartItem cartItem);
     CartItem checkQty(CartItem cartItem);
+    CartItem getCount(CartItem cartItem);
 
 }
