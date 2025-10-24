@@ -12,7 +12,7 @@ export function Support() {
     useEffect(() => {
         const fetch = async() => {
             const jsonData = await axiosData("/data/support.json");
-            const list = await getList();
+            const list = await getList("all");
             setMenus(jsonData.menus);
             setCategory(jsonData.category);
             setList(list);
