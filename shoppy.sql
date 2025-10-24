@@ -238,4 +238,50 @@ select cid, sum(pid = 1 and size = "xs" and id = "test") as checkQty
 insert into cart(size, qty, pid, id, cdate)
                     values('m', 1, 1, 'test', now());
 
+/*
+	고객 테이블 생성 : support
+*/
+use shoppy;
+create table support (
+			sid int auto_increment primary key,
+            stype varchar(30) not null,
+            title varchar(100) not null,
+            content varchar(200),
+            rdate datetime,
+            hits int
+            );
+desc support;
+
+insert into support(stype, title, rdate, hits)
+select
+	jt.stype,
+	jt.title,
+    -- jt.content,
+    jt.rdate,
+    jt.hits
+from 
+	json_table(
+		cast(load_file('C://ProgramData//MySQL//MySQL Server 8.0//Uploads//support_list.json') 
+				AS CHAR CHARACTER SET utf8mb4 ),
+		'$[*]' COLUMNS (
+			 stype 			VARCHAR(30)   PATH '$.type',
+			 title   		VARCHAR(100)  PATH '$.title',
+		-- 	 content 		VARCHAR(200)  PATH '$.content',
+			 rdate   		datetime      PATH '$.rdate',
+             hits 			int 		  PaTH '$.hits'
+		   )
+    ) as jt;
+
+select sid,title,stype,hits,rdate from support;
+select sid,title,stype,hits,rdate from support where stype = 'event';
+
+
+
+
+
+
+
+
+
+
 
