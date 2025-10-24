@@ -22,7 +22,8 @@ public class SupportServiceImpl implements SupportService{
         @Override
         public List<Support> findAll(Support support) {
             List<Support> list = null;
-            if(support.getStype() != null && support.getStype().equals("all")) {
+//            support.getStype() != null &&
+            if( support.getStype().equals("all")) {
                 list = supportRepository.findAll();
             } else {
                 list = supportRepository.findAll(support);
