@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { SearchForm } from '../components/commons/SearchForm';
 import { MenuList } from '../components/commons/MenuList';
 import { axiosData } from '../utils/dataFetch';
+import { getList } from '../feature/support/supportAPI.js'
 
 export function Support() {
     const [menus, setMenus] = useState([]);
@@ -11,23 +12,27 @@ export function Support() {
     useEffect(() => {
         const fetch = async() => {
             const jsonData = await axiosData("/data/support.json");
+            const list = await getList();
             setMenus(jsonData.menus);
             setCategory(jsonData.category);
-            setList(jsonData.list);
+            setList(list);
         }
         fetch();
     },[]);
-    const filterList = (type) => {
-        const filter = async() => {
-            const jsonData = await axiosData("/data/support.json");
-            if(type === "all"){
-                setList(jsonData.list);
-            } else {
-                const filterData = jsonData.list.filter((item)=>item.type === type);
-                setList(filterData);
-            }
-        }
-        filter();
+    const filterList = async(stype) => {
+        console.log("type ====>", stype);
+        const list = await getList(stype);
+        setList(list);
+//         const filter = async() => {
+//             const jsonData = await axiosData("/data/support.json");
+//             if(type === "all"){
+//                 setList(jsonData.list);
+//             } else {
+//                 const filterData = jsonData.list.filter((item)=>item.type === type);
+//                 setList(filterData);
+//             }
+//         }
+//         filter();
     }
     return (
     <div className="content">
@@ -49,7 +54,7 @@ export function Support() {
                 {list && list.map((item,idx) => 
                 <tr>
                     <td>{idx+1}</td>
-                    <td>[{item.type} 점검]</td>
+                    <td>[{item.stype} 점검]</td>
                     <td>{item.title}</td>
                     <td>{item.rdate}</td>
                     <td>{item.hits}</td>
