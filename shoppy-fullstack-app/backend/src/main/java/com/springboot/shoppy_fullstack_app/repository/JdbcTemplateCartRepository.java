@@ -54,4 +54,11 @@ public class JdbcTemplateCartRepository implements CartRepository{
         }
         return jdbcTemplate.update(sql, cartItem.getCid());
     }
+    @Override
+    public CartItem getCount(CartItem cartItem) {
+        String sql = """
+                select ifnull(sum(qty),0) as sumQty from cart where id = ?    
+                """;
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(CartItem.class),cartItem.getCid());
+    }
 }

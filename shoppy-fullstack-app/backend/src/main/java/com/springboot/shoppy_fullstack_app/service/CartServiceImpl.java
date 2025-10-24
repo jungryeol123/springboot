@@ -30,4 +30,9 @@ public class CartServiceImpl implements CartService{
         return cartRepository.updateQty(cartItem);
     }
 
+    @Override
+    public CartItem getCount(CartItem cartItem) {
+        return cartRepository.getCount(cartItem);
+    }
+
 }
