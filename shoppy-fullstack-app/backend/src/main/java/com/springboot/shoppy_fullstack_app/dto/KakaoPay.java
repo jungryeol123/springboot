@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class KakaoPay {
     private String orderId;
@@ -14,7 +16,7 @@ public class KakaoPay {
     private String totalAmount;
     private Receiver receiver;
     private PaymentInfo paymentInfo;
-    private String cidList;
+    private List<Integer> cidList;
 
     @Data
     public static class Receiver {
