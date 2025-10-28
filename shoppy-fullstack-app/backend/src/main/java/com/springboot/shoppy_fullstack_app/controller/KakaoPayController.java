@@ -70,7 +70,7 @@ public class KakaoPayController {
 
         // 3. 결제 완료 처리 (DB 상태 업데이트 등)
         //DB 상태 업데이트 - 주문상품을 order_history 테이블에 저장, cart에서는 삭제
-        orderService.save(payInfo);
+        int result = orderService.save(payInfo);
 
         URI redirect = URI.create("http://localhost:3000/payResult?orderId=" + orderId + "&status=success");
         HttpHeaders headers = new HttpHeaders();
