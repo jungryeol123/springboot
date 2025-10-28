@@ -19,23 +19,27 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    @PostMapping("/detailinfo")
-    public ProductDetailinfo detailinfo(@RequestBody ProductDetailinfo product) {
-        return productService.findDetailinfo(product.getPid());
-    }
-    @PostMapping("/qna")
-    public List<ProductQna> qna (@RequestBody ProductQna product) {
-        return productService.findQna(product.getPid());
-    }
+
     @GetMapping("/return")
     public ProductReturn getReturn() {
         return productService.findReturn();
+    }
+
+    @PostMapping("/qna")
+    public List<ProductQna> qna(@RequestBody Product product) {
+        return productService.findQna(product.getPid());
+    }
+
+    @PostMapping("/detailinfo")
+    public ProductDetailinfo detailinfo(@RequestBody Product product) {
+        return productService.findDetailinfo(product.getPid());
     }
 
     @PostMapping("/pid")
     public Product pid(@RequestBody Product product) {
         return productService.findByPid(product.getPid());
     }
+
     @GetMapping("/all")
     public List<Product> all() {
         return productService.findAll();

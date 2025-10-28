@@ -1,12 +1,10 @@
-import { useState, useRef,useContext } from 'react';
-import { useNavigate,Link} from 'react-router-dom';
+import { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
 import { FaLock } from "react-icons/fa";
 import { validateFormCheck } from '../utils/validate.js';
-import { CartContext } from '../context/CartContext.js';
 import { AuthContext } from '../context/AuthContext.js';
-import { useAuth } from '../hooks/useAuth.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { getLogin } from '../feature/auth/authAPI.js';
 
 export function Login() {
@@ -16,7 +14,6 @@ export function Login() {
     const pwdRef = useRef(null);
     const [formData, setFormData] = useState({id:'', pwd:''});
     const [errors, setErrors] = useState({id:'', pwd:''});
-    
 
     const handleFormChange = (e) => {
         const { name, value } = e.target; 
@@ -24,7 +21,7 @@ export function Login() {
         setErrors({id:'', pwd:''});
     }
 
-    const handleLoginSubmit = async(e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
         const param = {
             idRef: idRef,
@@ -32,14 +29,15 @@ export function Login() {
             setErrors: setErrors,
             errors: errors
         }
+       
+        const succ = await dispatch(getLogin(formData, param));
 
-        const succ = await dispatch(getLogin(formData,param));        //비동기식 처리 후 isLogin 변경
         if(succ) {
-            alert("로그인 성공!!");
+            alert("로그인에 성공하셨습니다.");
             navigate("/");
         } else {
-            alert("로그인 실패!!");
-            setFormData({id:"",pwd:""});
+            alert("로그인에 실패, 확인후 다시 진행해주세요.");
+            setFormData({id:'', pwd:''});
             idRef.current.focus();
         }
     }
@@ -88,7 +86,7 @@ export function Login() {
                             <label for="">아이디 저장</label>
                         </div>
                         <div>
-                            <Link to="/find-username">아이디 찾기</Link>
+                            <a href="#">아이디 찾기</a> 
                             <span>&gt;</span>
                             <a href="#">비밀번호 찾기</a> 
                             <span>&gt;</span>

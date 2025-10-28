@@ -10,16 +10,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/support")
 public class SupportController {
+
     private SupportService supportService;
 
     @Autowired
-    public SupportController (SupportService supportService) {
+    public SupportController(SupportService supportService) {
         this.supportService = supportService;
     }
 
-
     @PostMapping("/list")
-    public List<Support> list (@RequestBody Support support) {
+    public List<Support> list(@RequestBody Support support) {
         return supportService.findAll(support);
     }
 }

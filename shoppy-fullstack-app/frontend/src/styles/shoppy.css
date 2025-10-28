@@ -406,7 +406,7 @@ button {
 }
 .detail-images-list.img {
   /* border : 2px solid blue; */
-  width: 80%;
+  width: 70%;
   margin: 20px 0;
 }
 /* .detail-images.img {
@@ -816,4 +816,7 @@ button {
   justify-content: center;
   margin-top: 20px;
 }
+
+/****** tabs - qna-list-content *****/
+
 
