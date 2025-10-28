@@ -1,19 +1,20 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { validateSignupFormCheck } from '../utils/validate.js';
 import { initForm } from '../utils/init.js';
 import { axiosPost } from '../utils/dataFetch.js';
-import { useDispatch } from 'react-redux';
-import { getSignup,getIdCheck } from '../feature/auth/authAPI.js';
+import { getSignup, getIdCheck } from '../feature/auth/authAPI.js';
 
 export function Signup() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const initArray = ['id', 'pwd', 'cpwd', 'name', 'phone', 'emailName', 'emailDomain'];
     // const initForm = initArray.reduce((acc,cur) => {  //비동기
     //         acc[cur] = "";
     //         return acc;
     // }, {});
-    const navigate = useNavigate();
+
     const refs = useMemo(() => {  //Hooks 비동기식 처리 진행
         return initArray.reduce((acc,cur) => {
             acc[`${cur}Ref`] = React.createRef();         
@@ -21,10 +22,8 @@ export function Signup() {
         }, {});
     });   
 
-    const [form, setForm] = useState(initForm(initArray));
+    const [form, setForm] = useState(initForm(initArray));  //{id:"hong", ...}
     const [errors, setErrors] = useState({...initForm(initArray), emailDomain: ""});
-
-
 
     const handleChangeForm = (e) => {
         const { name, value } = e.target;
@@ -39,23 +38,20 @@ export function Signup() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         const param = {  refs: refs,   setErrors: setErrors }
-        const formData = {...form, email: form.emailName.concat('@',form.emailDomain)}
-        const result = await dispatch(getSignup(formData,param));
-        console.log("result -->" ,result);
+        const formData = { ...form, email: form.emailName.concat('@', form.emailDomain) }
+        const result = await dispatch(getSignup(formData, param));
+//         console.log('result------>> ', result);
+        if(result) {
+            alert("회원가입 성공!!");
+            navigate("/login");
+        }    else alert("회원가입 실패!!");
+    }//handleSubmit
 
-        if(result){ alert("회원가입이 완료되었습니다.")
-            //로그인 페이지로 이동!!
-            navigate("/login")
-            }
-            else alert("회원가입에 실패하였습니다.")
-    }
-
+    /** 아이디 중복체크 */
     const handleDupulicateIdCheck = async() => {
         const result = await dispatch(getIdCheck(form.id));
-
         alert(result);
-        }
-
+    }
 
     return (
     <div className="content">
@@ -65,7 +61,7 @@ export function Signup() {
             <form onSubmit={handleSubmit}>
                 <ul>
                     <li>
-                        <label  ><b>아이디</b></label>
+                        <label for="" ><b>아이디</b></label>
                         <span style={{color:"red", fontSize:"0.8rem"}}>{errors.id}</span>
                         <div>
                             <input type="text" 
@@ -75,7 +71,7 @@ export function Signup() {
                                     onChange={handleChangeForm}               
                                     placeholder = "아이디 입력(6~20자)" />
                             <button type="button"
-                                    onClick = {handleDupulicateIdCheck}
+                                    onClick={handleDupulicateIdCheck}
                                   > 중복확인</button>
                             <input type="hidden" id="idCheckResult" value="default" />
                         </div>

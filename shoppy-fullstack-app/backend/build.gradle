@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.springboot'
 version = '0.0.1-SNAPSHOT'
-description = 'shoppy project for Spring Boot'
+description = 'Shoppy project for Spring Boot'
 
 java {
 	toolchain {
@@ -14,21 +14,21 @@ java {
 	}
 }
 
-repositories {
-	mavenCentral()
-}
+//repositories {
+//	mavenCentral()
+//}
 
 dependencies {
-    //lombok
-    compileOnly("org.projectlombok:lombok:1.18.42")
-    annotationProcessor("org.projectlombok:lombok:1.18.42")
+    //spring security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    //JDBC - jdbcTemplate : spring security
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    //MySQL JDBC driver
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     runtimeOnly 'mysql:mysql-connector-java:8.0.31'
-
-    //spring-security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter'

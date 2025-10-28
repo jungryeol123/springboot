@@ -665,7 +665,7 @@ footer {
     /* height: 40px; */
     overflow: hidden;    
 }
-.support-content-menu{
+.support-content-menu {
     width: 110px;
     border: 1px solid var(--color-white);
     border-bottom: 2px solid rgb(137,137,135);
@@ -678,7 +678,7 @@ footer {
     font-family: '맑은 고딕';
     font-size: 12px;
     font-weight: 600;
-}
+} 
 .support-content-menu.support-active {
     background-color: var(--color-button);
     border-left: 1px solid var(--color-button);
@@ -688,14 +688,14 @@ footer {
     background-color: var(--color-button);
     border-left: 1px solid var(--color-button);
     border-bottom: 2px solid var(--color-button);
-    height: 40px;
+
 } */
 .support-content > nav + p {
     margin: 40px 0 20px; 
 }
 .support-content > table {
     width: 100%;
-    color:#777;
+    color: #777;
     text-align: center;
 }
 .support-content > table,

@@ -16,23 +16,21 @@ public class JdbcTemplateSupportRepository implements SupportRepository{
     public JdbcTemplateSupportRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
     @Override
     public List<Support> findAll(Support support) {
-
-
         String sql = """
-                select sid,title,stype,hits,rdate from support
-                where stype = ?
+                select sid, title, stype, hits, rdate from support
+                    where stype = ?
                 """;
-    return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Support.class),support.getStype());
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Support.class), support.getStype());
     }
+
     @Override
     public List<Support> findAll() {
-
-
         String sql = """
-                select sid,title,stype,hits,rdate from support
+                select sid, title, stype, hits, rdate from support
                 """;
-    return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Support.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Support.class));
     }
 }

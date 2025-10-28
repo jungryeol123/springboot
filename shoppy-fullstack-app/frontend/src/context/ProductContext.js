@@ -3,19 +3,19 @@ import { createContext, useState } from "react";
 export const ProductContext = createContext();
 
 export const ProductProvider = ({children}) => {
-    const [productList, setProductList] = useState();
-    const [imgList,setImageList] = useState([]);
-    const [product,setProduct] = useState({});
+    const [productList, setProductList] = useState([]);
+    const [product, setProduct] = useState({});
+    const [imgList, setImgList] = useState([]);
 
     return (
-        
-        <ProductContext.Provider value ={{
-                                productList, setProductList,
-                                product,setProduct,
-                                imgList, setImageList
-                                }}>
-                {children}
+        <ProductContext.Provider value={{  
+                                        productList, setProductList,
+                                        product, setProduct,
+                                        imgList, setImgList
+                                    }}>
+            {children}  
         </ProductContext.Provider>
-        
-    )
+    );
 }
+
+

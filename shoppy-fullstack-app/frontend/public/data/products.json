@@ -227,9 +227,9 @@
     {
         "pid" : "4",
         "image" : "/images/4.webp",
-        "name" : "티셔츠",
+        "name" : "반바지",
         "price": 12000,
-        "info" : "티셔츠",
+        "info" : "반바지",
         "rate": "3.2",
         "imgList" : [
             "/images/4.webp",

@@ -18,12 +18,12 @@ export function Return() {
             <p style={{paddingBottom:"20px"}}>{returnData && returnData.description}</p>
             <table className='review-list-content'>
                 <tbody>
-                    {returnData.list && returnData.list.map(item =>
+                    {returnData.list && returnData.list.map(item => 
                         <tr>
                             <td style={{width:"30%", textAlign:"center"}}>{item.title}</td>
                             <td>
                                 <ul  style={{textAlign:"left"}}>
-                                {item.infoList
+                                {item.infoList 
                                     && item.infoList .map(item =>
                                         <li>{item}</li>
                                     )}
@@ -37,3 +37,4 @@ export function Return() {
         </div>
     );
 }
+

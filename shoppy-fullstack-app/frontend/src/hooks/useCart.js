@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext.js';
 import { axiosData } from '../utils/dataFetch.js';
@@ -66,3 +65,4 @@ export function useCart() {
 
     return { addCart, showCart, updateCart, removeCart }
 }
+
