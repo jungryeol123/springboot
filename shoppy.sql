@@ -611,11 +611,10 @@ insert into orders(
     delete  from order_detail;
 select * from order_detail;
 select * from orders;
+select * from cart;
 select * from view_cartList
 where cid in (3,4,5);
-    
 
-
-
+select ifnull(Max(pwd), null) as pwd from member where id = 'sdsd';
 
 

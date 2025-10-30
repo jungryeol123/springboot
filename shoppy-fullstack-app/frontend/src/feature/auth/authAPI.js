@@ -32,7 +32,7 @@ export const getSignup = (formData, param) => async(dispatch) => {
 export const getLogin = (formData, param) => async(dispatch) => {
 
     if(validateFormCheck(param)) {
-        const url = "/member/login";
+        const url = "/member/login";        //프록시를 통해 전송 시 상대경로입력!!
         const result = await axiosPost(url, formData);
         if(result) {
             dispatch(login({"userId":formData.id}));
@@ -48,7 +48,11 @@ export const getLogin = (formData, param) => async(dispatch) => {
     Logout
  */
 export const getLogout = () => async(dispatch) => {
+    const url = "/member/logout";
+    const result = await axiosPost(url,{});
+    if(result) {
     dispatch(logout());
     dispatch(resetCartCount());
-    return true;
+    }
+    return result;
 }
