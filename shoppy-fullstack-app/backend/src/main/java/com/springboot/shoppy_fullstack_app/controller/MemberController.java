@@ -73,10 +73,20 @@ public class MemberController {
             // SecurityContext 세션에 "명시 저장" (requireExplicitSave(true)일 때 필수)
             contextRepository.saveContext(context, request, response);
 
+            //4. 로그인 성공 시 CSRF 토큰을 재발행을 이해 브라우저 토큰 null 처리
+            var xsrf = new Cookie("XSRF-TOKEN", null);
+            xsrf.setPath("/");               // ← 기존과 동일
+            xsrf.setMaxAge(0);               // ← 즉시 만료
+            xsrf.setHttpOnly(false);          // 개발 중에도 HttpOnly 유지 권장
+            // xsrf.setSecure(true);         // HTTPS에서만. 로컬 http면 주석
+            // xsrf.setDomain("localhost");  // 기존 쿠키가 domain=localhost였다면 지정
+            response.addCookie(xsrf);
+
             return ResponseEntity.ok(Map.of("login", true,
                     "userId", member.getId()));
 
         }catch(Exception e) {
+            //로그인 실패
             return ResponseEntity.ok(Map.of("login", false));
         }
     }
