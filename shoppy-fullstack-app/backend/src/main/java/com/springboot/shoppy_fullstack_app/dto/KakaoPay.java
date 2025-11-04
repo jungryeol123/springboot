@@ -33,8 +33,7 @@ public class KakaoPay {
         private int shippingFee;
         private int discountAmount;
         private int totalAmount;
-    }//Receiver
+    }
 
-
-}//kakaoPay dto
+}//KakaoPay dto
 
