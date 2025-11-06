@@ -7,7 +7,7 @@ import com.springboot.shoppy_fullstack_app.dto.ProductReturn;
 import com.springboot.shoppy_fullstack_app.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service

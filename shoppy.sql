@@ -566,9 +566,10 @@ create table orders (
 		on delete cascade	on update cascade
 );
 
+show databases;
+use shoppy;
 show tables;
-desc orders;
-select * from product;
+select * from member;
 
 /*********************************************************************
 	주문 상세 테이블 : order_detail
@@ -616,5 +617,7 @@ select * from view_cartList
 where cid in (3,4,5);
 
 select ifnull(Max(pwd), null) as pwd from member where id = 'sdsd';
-
-
+alter table product change imgList img_list JSON;
+desc product_detailinfo;
+select * from product_detailinfo;
+-- select * from product
