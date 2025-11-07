@@ -1,0 +1,26 @@
+package com.springboot.shoppy_fullstack_app.dto;
+
+import com.springboot.shoppy_fullstack_app.entity.CartItem;
+import lombok.Data;
+
+@Data
+public class CartItemDto {
+    private int cid;
+    private String size;
+    private int qty;
+    private int pid;
+    private String id;
+    private String cdate;
+    private Long checkQty;
+    private String type;
+    private int sumQty;
+
+//    public CartItemDto () {}
+//    public CartItemDto (CartItem entity) {
+//        this.cid = entity.getCid();
+//        this.size = entity.getSize();
+//        this.qty = entity.getQty();
+//        this.pid = entity.getPid();
+//        this.cdate = entity.getCdate();
+//    }
+}
