@@ -1,33 +1,33 @@
-package com.springboot.shoppy_fullstack_app.entity;
+de)
+		on delete cascade   on update cascade,
+	constraint fk_product_order_detail foreign key(pid)	references product(pid)
+		on delete cascade  on update cascade
+);
 
-import com.springboot.shoppy_fullstack_app.dto.CartItemDto;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+show tables;
+desc order_detail;
 
-import java.time.LocalDate;
+select * from view_cartList;
 
+desc orders;
 
-@Entity
-@Table(name = "cart")
-@Getter
-@Setter
-public class CartItem {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cid;
-    private String size;
-    private int qty;
-    private int pid;
-    private String id;
-    private LocalDate cdate;
+insert into orders(
+	order_code, member_id, shipping_fee, discount_amount, total_amount, receiver_name, receiver_phone, zipcode, address1, address2, memo, odate
+    )
+ values();
+ 
+ select
+	:orderCode, pid, name as pname, size, qty, totalPrice as pid_total_price,
+    :discount
+    from view_cartlist;
+    
+    set SQL_SAFE_UPDATES = 0;
+    delete  from orders;
+    delete  from order_detail;
+select * from order_detail;
+select * from orders;
+select * from cart;
+select * from view_cartList
+where cid in (3,4,5);
 
-    public CartItem() {}
-    public CartItem(CartItemDto dto) {
-        this.cid = dto.getCid();
-        this.size = dto.getSize();
-        this.qty = dto.getQty();
-        this.pid = dto.getPid();
-        this.id = dto.getId();
-        this.cdate = LocalDate.now();
-    }
-}
+select ifnull(Max(pwd), null) as pwd from 
